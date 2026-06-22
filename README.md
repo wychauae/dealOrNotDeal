@@ -4,10 +4,14 @@ A modern, frontend-only web game inspired by the TV show **Deal or No Deal**. Bu
 
 ## Features
 
-- **26 briefcases** with classic prize values ($0.01 – $1,000,000)
+- **26 silver briefcases** with classic prize values ($0.01 – $1,000,000)
 - **Full game flow**: pick your case → open cases in rounds → Banker offers → Deal or No Deal → final reveal
+- **3D-style briefcases** — brushed silver metal texture, lid-flip animation, and in-case money reveal
+- **Banker offer history** — sidebar panel tracking every offer by round, including bargained increases
+- **One-time bargain** — negotiate with the Banker once per game for a potentially higher offer
 - **Realistic Banker offers** based on expected value, round progression, and slight randomness
-- **Polished UI** with glassmorphism, gold gradients, and depth effects
+- **English & Chinese (中文)** — full UI translation with a header language toggle (persisted)
+- **Polished UI** with glassmorphism, gold accents, and depth effects
 - **Dark & light mode** with persistent preference
 - **Optional sound effects** (Web Audio API, toggleable)
 - **Framer Motion animations** for reveals, offers, and transitions
@@ -23,39 +27,46 @@ A modern, frontend-only web game inspired by the TV show **Deal or No Deal**. Bu
 | State | Zustand |
 | Animation | Framer Motion |
 | Styling | CSS Modules + CSS Variables |
+| i18n | Custom translation hook (`en` / `zh`) |
 
 ## Project Structure
 
 ```
 src/
-├── components/          # UI components
-│   ├── BankerOfferModal.tsx
+├── components/
+│   ├── BankerOfferModal.tsx   # Deal / No Deal + bargain
 │   ├── CaseGrid.tsx
-│   ├── CaseTile.tsx
+│   ├── CaseTile.tsx           # Silver briefcase tiles
 │   ├── FinalChoiceModal.tsx
 │   ├── GameBoard.tsx
 │   ├── GameStatus.tsx
-│   ├── Header.tsx
+│   ├── Header.tsx             # Theme, sound, language toggles
+│   ├── OfferHistory.tsx       # Banker offer history panel
 │   ├── OutcomeScreen.tsx
 │   ├── RevealOverlay.tsx
 │   ├── ValueBoard.tsx
 │   └── WelcomeScreen.tsx
 ├── hooks/
-│   ├── useSound.ts      # Web Audio sound effects
-│   └── useTheme.ts      # Theme sync to DOM
+│   ├── useLocale.ts           # Syncs `lang` attribute to DOM
+│   ├── useSound.ts            # Web Audio sound effects
+│   └── useTheme.ts            # Theme sync to DOM
+├── i18n/
+│   ├── translations.ts        # English & Chinese strings
+│   └── useTranslation.ts
 ├── store/
-│   ├── gameStore.ts     # Game state (Zustand)
-│   └── settingsStore.ts # Theme & sound prefs
+│   ├── gameStore.ts           # Game state (Zustand)
+│   └── settingsStore.ts       # Theme, locale & sound prefs
 ├── types/
-│   └── game.ts          # TypeScript interfaces
+│   └── game.ts
 ├── utils/
-│   ├── bankerOffer.ts   # Offer calculation logic
-│   ├── constants.ts     # Prize values & round config
-│   ├── gameLogic.ts     # Case creation & helpers
-│   └── shuffle.ts       # Fisher-Yates shuffle
+│   ├── bankerOffer.ts         # Offer & bargain calculation
+│   ├── constants.ts           # Prize values & round config
+│   ├── formatCurrency.ts      # Currency & compact tile formatting
+│   ├── gameLogic.ts           # Case creation & helpers
+│   └── shuffle.ts             # Fisher-Yates shuffle
 ├── App.tsx
 ├── App.css
-├── index.css            # Global styles & theme tokens
+├── index.css                  # Global styles, theme & briefcase tokens
 └── main.tsx
 ```
 
@@ -63,7 +74,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm (or yarn/pnpm)
 
 ### Install & Run
@@ -89,10 +100,19 @@ npm run preview
 
 1. Click **Start New Game**
 2. **Select one briefcase** — this is yours for the entire game
-3. Each **round**, open the required number of other briefcases
-4. After each round, the **Banker makes an offer** — accept (**Deal**) or continue (**No Deal**)
-5. When only two cases remain, choose to **keep or swap**
-6. See your final winnings on the outcome screen
+3. Each **round**, open the required number of other briefcases (watch the lid flip and reveal the amount inside)
+4. After each round, the **Banker makes an offer** — accept (**Deal**), continue (**No Deal**), or **Bargain** once per game
+5. Review past offers anytime in the **Offer History** sidebar
+6. When only two cases remain, choose to **keep or swap**
+7. See your final winnings on the outcome screen
+
+## Language
+
+Use the **EN / 中** button in the header to switch between English and Chinese. Your preference is saved in `localStorage`.
+
+- UI strings, status messages, and modals are fully translated
+- Prize amounts stay in USD; Chinese mode uses compact formats where helpful (e.g. `$100万` on small briefcase tiles)
+- Hover a briefcase tile to see the full formatted amount
 
 ## Game Logic
 
@@ -119,6 +139,22 @@ offer = expectedValue × roundMultiplier × variance(0.94–1.06)
 ```
 
 Multipliers increase each round (22% → 99%), so offers become more generous as fewer cases remain.
+
+### Bargain (One Time Per Game)
+
+When an offer appears, you may press **Bargain** once. The Banker may:
+
+| Outcome | Approx. chance | Result |
+|---------|----------------|--------|
+| Improved | ~60% | Offer raised 8–18% |
+| Small bump | ~10% | Offer raised 3–7% |
+| Refused | ~25% | Offer unchanged |
+
+Successful bargains are recorded in **Offer History** with the original amount struck through.
+
+### Briefcase Display
+
+Opened briefcases show a compact amount on the tile to prevent overflow (e.g. `$1M` instead of `$1,000,000`). The full value is always shown in the reveal overlay and on hover.
 
 ## License
 
