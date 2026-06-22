@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useGameStore } from './store/gameStore';
 import { useTheme } from './hooks/useTheme';
 import { useLocale } from './hooks/useLocale';
+import { useBgm } from './hooks/useBgm';
 import { Header } from './components/Header';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { GameBoard } from './components/GameBoard';
@@ -24,6 +25,8 @@ function App() {
 
   const showGame =
     phase !== 'welcome' && phase !== 'game-over';
+
+  useBgm(showGame);
 
   return (
     <div className="app">

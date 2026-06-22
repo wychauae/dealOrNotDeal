@@ -64,6 +64,32 @@
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.02em;
+  color: var(--text-primary);
+  background: var(--surface-elevated);
+}
+
+[data-theme='dark'] .langBtn {
+  color: var(--accent);
+  background: rgba(255, 215, 0, 0.12);
+  border-color: rgba(255, 215, 0, 0.45);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
+}
+
+[data-theme='dark'] .langBtn:hover {
+  background: rgba(255, 215, 0, 0.22);
+  border-color: var(--accent);
+  color: #fff8dc;
+}
+
+[data-theme='light'] .langBtn {
+  color: #3a4258;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #b0b8c4;
+}
+
+[data-theme='light'] .langBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .controlBtn:hover,

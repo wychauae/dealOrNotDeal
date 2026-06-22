@@ -9,8 +9,8 @@ export interface TranslationParams {
 const en = {
   appTitle: 'Deal or No Deal',
   appSubtitle: 'Choose wisely. Trust your gut.',
-  muteSound: 'Mute sound effects',
-  enableSound: 'Enable sound effects',
+  muteSound: 'Mute sound & music',
+  enableSound: 'Enable sound & music',
   switchToLight: 'Switch to light mode',
   switchToDark: 'Switch to dark mode',
   switchToChinese: 'Switch to Chinese',
@@ -97,8 +97,8 @@ const en = {
 const zh: Record<keyof typeof en, string> = {
   appTitle: '成交不成交',
   appSubtitle: '慎重选择，相信直觉。',
-  muteSound: '关闭音效',
-  enableSound: '开启音效',
+  muteSound: '关闭音效和背景音乐',
+  enableSound: '开启音效和背景音乐',
   switchToLight: '切换到浅色模式',
   switchToDark: '切换到深色模式',
   switchToChinese: '切换到中文',

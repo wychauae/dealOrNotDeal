@@ -96,6 +96,32 @@ npm run build
 npm run preview
 ```
 
+## Deploy to Vercel
+
+This project is configured for [Vercel](https://vercel.com) with `vercel.json` (Vite build → `dist`).
+
+### Option A — Vercel CLI (fastest)
+
+```bash
+# One-time login
+npx vercel login
+
+# Preview deployment
+npx vercel
+
+# Production deployment
+npx vercel --prod
+```
+
+### Option B — Git integration
+
+1. Push this repo to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new) and import the repository
+3. Vercel auto-detects Vite — no extra settings needed
+4. Click **Deploy**
+
+**Live site:** [https://dealornotdeal-bice.vercel.app](https://dealornotdeal-bice.vercel.app)
+
 ## How to Play
 
 1. Click **Start New Game**

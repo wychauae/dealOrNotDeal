@@ -1,5 +1,6 @@
 import { useCallback, useRef } from 'react';
 import { useSettingsStore } from '../store/settingsStore';
+import { getAudioContext, resumeAudioContext } from '../utils/audioContext';
 
 type SoundType = 'click' | 'reveal' | 'offer' | 'deal' | 'win' | 'lose';
 
@@ -18,7 +19,7 @@ export function useSound() {
 
   const getContext = useCallback(() => {
     if (!ctxRef.current) {
-      ctxRef.current = new AudioContext();
+      ctxRef.current = getAudioContext();
     }
     return ctxRef.current;
   }, []);
@@ -47,11 +48,9 @@ export function useSound() {
     (type: SoundType) => {
       if (!soundEnabled) return;
 
-      const ctx = getContext();
-      if (ctx.state === 'suspended') {
-        void ctx.resume();
-      }
+      void resumeAudioContext();
 
+      const ctx = getContext();
       const freqs = FREQUENCIES[type];
       const now = ctx.currentTime;
 
