@@ -5,6 +5,7 @@ import { useSound } from '../hooks/useSound';
 import { useTranslation } from '../i18n/useTranslation';
 import { getBargainMessageKey } from '../i18n/translations';
 import { BargainButton } from './BargainButton';
+import { CurrencyAmount } from './CurrencyAmount';
 import styles from './BankerOfferModal.module.css';
 
 interface BankerOfferModalProps {
@@ -94,12 +95,13 @@ export function BankerOfferModal({
             <motion.div key="offer-display">
               <motion.h2
                 id="offer-heading"
-                className={styles.offer}
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring', stiffness: 200 }}
               >
-                {formatCurrency(offer, locale)}
+                <CurrencyAmount className={styles.offer}>
+                  {formatCurrency(offer, locale)}
+                </CurrencyAmount>
               </motion.h2>
 
               <AnimatePresence>

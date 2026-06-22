@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import type { BankerOfferRecord } from '../types/game';
 import { formatCurrency } from '../utils/gameLogic';
 import { useTranslation } from '../i18n/useTranslation';
+import { CurrencyAmount } from './CurrencyAmount';
 import styles from './OfferHistory.module.css';
 
 interface OfferHistoryProps {
@@ -37,11 +38,11 @@ export function OfferHistory({ history }: OfferHistoryProps) {
             </span>
             <div className={styles.amounts}>
               {record.previousOffer !== undefined && (
-                <span className={styles.previous}>
+                <CurrencyAmount className={styles.previous}>
                   {formatCurrency(record.previousOffer, locale)}
-                </span>
+                </CurrencyAmount>
               )}
-              <span
+              <CurrencyAmount
                 className={[
                   styles.offer,
                   record.wasBargained && record.previousOffer !== undefined
@@ -52,7 +53,7 @@ export function OfferHistory({ history }: OfferHistoryProps) {
                   .join(' ')}
               >
                 {formatCurrency(record.offer, locale)}
-              </span>
+              </CurrencyAmount>
             </div>
             {record.wasBargained && (
               <span className={styles.bargainTag}>{t('bargained')}</span>

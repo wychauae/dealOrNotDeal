@@ -1,10 +1,12 @@
 import type { Locale } from '../i18n/translations';
 
-/** Normalizes to `$` (no US prefix) with a space before the amount */
+const CURRENCY_GAP = '\u00A0';
+
+/** Normalizes to `$` (no US prefix) with a non-breaking space before the amount */
 export function withCurrencySpacing(formatted: string): string {
   return formatted
-    .replace(/^US\$(?=\S)/, '$ ')
-    .replace(/^\$(?=\S)/, '$ ');
+    .replace(/^US\$(?=\S)/, `$${CURRENCY_GAP}`)
+    .replace(/^\$(?=\S)/, `$${CURRENCY_GAP}`);
 }
 
 function formatNumber(value: number, locale: Locale): string {

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { formatCurrency } from '../utils/gameLogic';
 import { useSound } from '../hooks/useSound';
 import { useTranslation } from '../i18n/useTranslation';
+import { CurrencyAmount } from './CurrencyAmount';
 import styles from './RevealOverlay.module.css';
 
 interface RevealOverlayProps {
@@ -45,8 +46,10 @@ export function RevealOverlay({ caseId, value, onComplete }: RevealOverlayProps)
         onAnimationComplete={handleAnimationComplete}
       >
         <p className={styles.label}>{t('revealCase', { id: caseId })}</p>
-        <h2 id="reveal-heading" className={styles.value}>
-          {formatCurrency(value, locale)}
+        <h2 id="reveal-heading" className={styles.valueHeading}>
+          <CurrencyAmount className={styles.value}>
+            {formatCurrency(value, locale)}
+          </CurrencyAmount>
         </h2>
         <p className={styles.message}>
           {isLowValue

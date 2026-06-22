@@ -111,6 +111,13 @@ button {
   -webkit-touch-callout: none;
 }
 
+/* Keep currency amounts on a single line ($ + number) */
+.currencyAmount {
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+}
+
 /* Suppress mobile tap flash globally (Safari / Chrome on Android) */
 a,
 [role='button'],

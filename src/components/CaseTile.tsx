@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import type { Case } from '../types/game';
 import { formatBriefcaseCurrency, formatCurrency } from '../utils/gameLogic';
 import { useTranslation } from '../i18n/useTranslation';
+import { CurrencyAmount } from './CurrencyAmount';
 import styles from './CaseTile.module.css';
 
 interface CaseTileProps {
@@ -119,12 +120,12 @@ export function CaseTile({
                 <span className={styles.moneyIcon} aria-hidden="true">
                   💵
                 </span>
-                <span
+                <CurrencyAmount
                   className={styles.moneyAmount}
                   title={fullAmount}
                 >
                   {displayAmount}
-                </span>
+                </CurrencyAmount>
               </motion.div>
             ) : (
               <>

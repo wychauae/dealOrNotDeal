@@ -3,6 +3,7 @@ import { CASE_VALUES } from '../utils/constants';
 import { formatCurrency } from '../utils/gameLogic';
 import type { Case } from '../types/game';
 import { useTranslation } from '../i18n/useTranslation';
+import { CurrencyAmount } from './CurrencyAmount';
 import styles from './ValueBoard.module.css';
 
 interface ValueBoardProps {
@@ -57,7 +58,7 @@ export function ValueBoard({ cases }: ValueBoardProps) {
                   />
                 )}
               </AnimatePresence>
-              {formatted}
+              <CurrencyAmount>{formatted}</CurrencyAmount>
             </motion.li>
           );
         })}

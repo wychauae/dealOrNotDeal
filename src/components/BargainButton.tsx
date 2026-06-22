@@ -1,6 +1,5 @@
 import { useCallback, useRef, useState, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import { useTouchDevice } from '../hooks/useTouchDevice';
 import { useTranslation } from '../i18n/useTranslation';
 import styles from './BankerOfferModal.module.css';
 
@@ -13,7 +12,6 @@ interface BargainButtonProps {
 }
 
 export function BargainButton({ disabled, onConfirm }: BargainButtonProps) {
-  const isTouchDevice = useTouchDevice();
   const { t } = useTranslation();
   const [holding, setHolding] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -59,7 +57,7 @@ export function BargainButton({ disabled, onConfirm }: BargainButtonProps) {
 
   const startHold = useCallback(
     (clientX: number, clientY: number) => {
-      if (disabled || !isTouchDevice) return;
+      if (disabled) return;
 
       completedRef.current = false;
       startTimeRef.current = Date.now();
@@ -67,7 +65,7 @@ export function BargainButton({ disabled, onConfirm }: BargainButtonProps) {
       setHolding(true);
       rafRef.current = requestAnimationFrame(tick);
     },
-    [disabled, isTouchDevice, clearHold, tick],
+    [disabled, tick],
   );
 
   const cancelIfMoved = useCallback(
@@ -82,26 +80,27 @@ export function BargainButton({ disabled, onConfirm }: BargainButtonProps) {
     [holding, clearHold],
   );
 
-  const handleClick = () => {
-    if (disabled || isTouchDevice) return;
-    onConfirm();
+  const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (disabled) return;
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    startHold(e.clientX, e.clientY);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (disabled || !isTouchDevice) return;
-    const touch = e.touches[0];
-    startHold(touch.clientX, touch.clientY);
+  const handlePointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+    cancelIfMoved(e.clientX, e.clientY);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isTouchDevice) return;
-    const touch = e.touches[0];
-    cancelIfMoved(touch.clientX, touch.clientY);
+  const handlePointerUp = () => {
+    if (!completedRef.current) {
+      clearHold();
+    }
   };
 
-  const handleTouchEnd = () => {
-    if (!isTouchDevice || completedRef.current) return;
-    clearHold();
+  const handlePointerCancel = () => {
+    if (!completedRef.current) {
+      clearHold();
+    }
   };
 
   const label = disabled ? t('bargainUsed') : t('bargain');
@@ -113,28 +112,27 @@ export function BargainButton({ disabled, onConfirm }: BargainButtonProps) {
         className={[
           styles.bargainBtn,
           holding && styles.bargainBtnHolding,
-          isTouchDevice && !disabled && styles.bargainBtnTouch,
+          !disabled && styles.bargainBtnTouch,
         ]
           .filter(Boolean)
           .join(' ')}
-        onClick={handleClick}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerCancel}
+        onPointerCancel={handlePointerCancel}
+        onClick={(e) => e.preventDefault()}
         disabled={disabled}
-        whileHover={!disabled && !isTouchDevice ? { scale: 1.02 } : undefined}
-        whileTap={!disabled && !isTouchDevice ? { scale: 0.98 } : undefined}
         aria-label={disabled ? t('bargainUsedAria') : t('bargainAria')}
       >
-        {isTouchDevice && holding && (
+        {holding && (
           <span
             className={styles.holdProgress}
             style={{ transform: `scaleX(${progress})` }}
             aria-hidden="true"
           />
         )}
-        {isTouchDevice && holding && (
+        {holding && (
           <span
             className={styles.holdRing}
             style={{ '--hold-progress': progress } as CSSProperties}
@@ -143,7 +141,7 @@ export function BargainButton({ disabled, onConfirm }: BargainButtonProps) {
         )}
         <span className={styles.bargainLabel}>{label}</span>
       </motion.button>
-      {isTouchDevice && !disabled && (
+      {!disabled && (
         <p className={styles.bargainHint}>{t('bargainHoldHint')}</p>
       )}
     </div>

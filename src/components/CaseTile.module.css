@@ -240,15 +240,11 @@
 }
 
 .moneyAmount {
-  display: block;
-  width: 100%;
-  max-width: 100%;
   font-size: clamp(0.45rem, 1.6vw, 0.68rem);
   font-weight: 800;
   color: #7cfc00;
   text-shadow: 0 0 6px rgba(124, 252, 0, 0.45);
   line-height: 1.15;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: -0.02em;

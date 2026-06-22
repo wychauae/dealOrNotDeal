@@ -4,6 +4,7 @@ import type { Case, GameOutcome } from '../types/game';
 import { useSound } from '../hooks/useSound';
 import { useTranslation } from '../i18n/useTranslation';
 import type { TranslationKey } from '../i18n/translations';
+import { CurrencyAmount } from './CurrencyAmount';
 import styles from './OutcomeScreen.module.css';
 
 interface OutcomeScreenProps {
@@ -32,9 +33,7 @@ export function OutcomeScreen({
   const { t, locale } = useTranslation();
   const isBigWin = winnings >= 100000;
   const playerCase = cases.find((c) => c.id === playerCaseId);
-  const otherValues = cases
-    .filter((c) => c.id !== playerCaseId)
-    .map((c) => ({ id: c.id, value: c.value }));
+  const allCasesSorted = [...cases].sort((a, b) => a.id - b.id);
 
   const handleRestart = () => {
     play('click');
@@ -71,9 +70,9 @@ export function OutcomeScreen({
         onAnimationComplete={() => play(isBigWin ? 'win' : 'reveal')}
       >
         <span className={styles.winningsLabel}>{t('youWon')}</span>
-        <span className={styles.winningsAmount}>
+        <CurrencyAmount className={styles.winningsAmount}>
           {formatCurrency(winnings, locale)}
-        </span>
+        </CurrencyAmount>
       </motion.div>
 
       {playerCase && (
@@ -81,22 +80,27 @@ export function OutcomeScreen({
           <h3 className={styles.summaryTitle}>{t('fullReveal')}</h3>
           <p className={styles.playerReveal}>
             {t('yourCaseContained', { id: playerCaseId ?? '' })}{' '}
-            <strong>{formatCurrency(playerCase.value, locale)}</strong>
+            <strong>
+              <CurrencyAmount>
+                {formatCurrency(playerCase.value, locale)}
+              </CurrencyAmount>
+            </strong>
           </p>
           <ul className={styles.allCases} aria-label={t('allCaseValues')}>
-            {otherValues.slice(0, 8).map(({ id, value }) => (
-              <li key={id}>
-                {t('caseValue', {
-                  id,
-                  amount: formatCurrency(value, locale),
-                })}
+            {allCasesSorted.map(({ id, value }) => (
+              <li
+                key={id}
+                className={id === playerCaseId ? styles.playerCaseItem : undefined}
+              >
+                <span>{t('caseNumber', { id })}</span>{' '}
+                <CurrencyAmount>
+                  {formatCurrency(value, locale)}
+                </CurrencyAmount>
+                {id === playerCaseId && (
+                  <span className={styles.yoursTag}>{t('yours')}</span>
+                )}
               </li>
             ))}
-            {otherValues.length > 8 && (
-              <li className={styles.more}>
-                {t('moreCasesRevealed', { count: otherValues.length - 8 })}
-              </li>
-            )}
           </ul>
         </div>
       )}

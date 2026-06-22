@@ -67,7 +67,7 @@
 }
 
 .summary {
-  max-width: 400px;
+  max-width: 520px;
   width: 100%;
   margin-bottom: 2rem;
   text-align: left;
@@ -93,16 +93,33 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.35rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.35rem 0.75rem;
   font-size: 0.8rem;
   color: var(--text-muted);
+  max-height: min(50vh, 360px);
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }
 
-.more {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-style: italic;
+.allCases li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playerCaseItem {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.yoursTag {
+  margin-left: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
 }
 
 .restartBtn {
@@ -129,5 +146,12 @@
 
   .allCases {
     grid-template-columns: 1fr;
+    max-height: min(45vh, 320px);
+  }
+}
+
+@media (min-width: 640px) {
+  .allCases {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
