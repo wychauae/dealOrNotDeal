@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useGameStore } from './store/gameStore';
 import { useTheme } from './hooks/useTheme';
 import { useLocale } from './hooks/useLocale';
 import { useBgm } from './hooks/useBgm';
+import { useMobileTouchGuard } from './hooks/useMobileTouchGuard';
 import { Header } from './components/Header';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { GameBoard } from './components/GameBoard';
@@ -10,8 +12,11 @@ import { OutcomeScreen } from './components/OutcomeScreen';
 import './App.css';
 
 function App() {
+  const appRef = useRef<HTMLDivElement>(null);
+
   useTheme();
   useLocale();
+  useMobileTouchGuard(appRef);
 
   const {
     phase,
@@ -29,7 +34,7 @@ function App() {
   useBgm(showGame);
 
   return (
-    <div className="app">
+    <div className="app" ref={appRef}>
       <div className="app-bg" aria-hidden="true" />
       <Header />
 

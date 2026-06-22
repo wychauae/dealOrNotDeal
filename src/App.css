@@ -2,6 +2,27 @@
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Prevent long-press selection & tap flash on all game controls */
+.app button,
+.app [role='button'],
+.app [role='grid'],
+.app [role='gridcell'],
+.app a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.app button,
+.app [role='button'] {
+  touch-action: manipulation;
 }
 
 .app-bg {

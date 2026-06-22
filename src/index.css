@@ -107,6 +107,16 @@ html[lang='zh-CN'] body {
 
 button {
   font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Suppress mobile tap flash globally (Safari / Chrome on Android) */
+a,
+[role='button'],
+input,
+label {
+  -webkit-tap-highlight-color: transparent;
 }
 
 :focus-visible {

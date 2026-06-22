@@ -3,6 +3,11 @@
   cursor: pointer;
   perspective: 500px;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 .briefcase {
