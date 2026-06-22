@@ -1,0 +1,197 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal {
+  background: var(--glass-bg);
+  border: 2px solid var(--accent);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: var(--shadow-gold-lg);
+}
+
+.bankerAvatar {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 4px 12px rgba(255, 180, 0, 0.4));
+}
+
+.bankerLabel {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.round {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 1rem;
+}
+
+.offer {
+  font-size: clamp(2.5rem, 10vw, 3.5rem);
+  font-weight: 900;
+  margin: 0;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.prompt {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 1.25rem 0 1.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.dealBtn,
+.noDealBtn {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: box-shadow 0.2s;
+}
+
+.dealBtn {
+  background: var(--gradient-gold-solid);
+  color: #1a1000;
+  box-shadow: var(--shadow-gold);
+}
+
+.dealBtn:hover {
+  box-shadow: 0 6px 24px rgba(255, 180, 0, 0.5);
+}
+
+.noDealBtn {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  border: 2px solid var(--glass-border);
+}
+
+.noDealBtn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.dealBtn:focus-visible,
+.noDealBtn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.bargainBtn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px dashed var(--glass-border);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.bargainBtn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(255, 180, 0, 0.06);
+}
+
+.bargainBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bargainBtn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.bargainingState {
+  padding: 1.5rem 0;
+}
+
+.phoneIcon {
+  font-size: 2.5rem;
+  animation: ring 0.5s ease-in-out infinite alternate;
+}
+
+.bargainingText {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0.75rem 0;
+  font-weight: 600;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.bargainMessage {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin: 0.75rem 0 0;
+  font-weight: 600;
+  font-style: italic;
+}
+
+@keyframes ring {
+  from { transform: rotate(-8deg); }
+  to { transform: rotate(8deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-6px); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+  }
+}

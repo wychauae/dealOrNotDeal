@@ -1,0 +1,340 @@
+.tile {
+  aspect-ratio: 4 / 5;
+  cursor: pointer;
+  perspective: 500px;
+  position: relative;
+}
+
+.briefcase {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* ── Handle ── */
+.handle {
+  position: absolute;
+  top: -2%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 40%;
+  height: 12%;
+  display: flex;
+  justify-content: center;
+}
+
+.handleBar {
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--briefcase-metal-dark);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background:
+    var(--briefcase-brush),
+    linear-gradient(
+      180deg,
+      var(--briefcase-metal-light) 0%,
+      var(--briefcase-metal-mid) 55%,
+      var(--briefcase-metal-dark) 100%
+    );
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.65),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Lid ── */
+.lid {
+  position: absolute;
+  top: 8%;
+  left: 4%;
+  right: 4%;
+  height: 22%;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.lidFace {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px 6px 2px 2px;
+  background:
+    var(--briefcase-brush),
+    linear-gradient(
+      155deg,
+      var(--briefcase-metal-light) 0%,
+      var(--briefcase-metal) 35%,
+      var(--briefcase-metal-mid) 65%,
+      var(--briefcase-metal-dark) 100%
+    );
+  border: 1px solid var(--briefcase-metal-dark);
+  box-shadow:
+    inset 0 2px 5px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.18),
+    0 4px 10px rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lidFace::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 40%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.lidNumber {
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  font-weight: 900;
+  color: var(--briefcase-number);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  z-index: 1;
+}
+
+.latch {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22%;
+  height: 5px;
+  background:
+    var(--briefcase-brush),
+    linear-gradient(
+      180deg,
+      #f0f2f5 0%,
+      #c8ccd4 40%,
+      #989ea8 100%
+    );
+  border-radius: 2px;
+  border: 1px solid #7a808a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+/* ── Body ── */
+.body {
+  position: absolute;
+  top: 28%;
+  left: 4%;
+  right: 4%;
+  bottom: 2%;
+  border-radius: 2px 2px 8px 8px;
+  background:
+    var(--briefcase-brush),
+    linear-gradient(
+      168deg,
+      var(--briefcase-metal-light) 0%,
+      var(--briefcase-metal) 28%,
+      var(--briefcase-metal-mid) 58%,
+      var(--briefcase-metal-dark) 100%
+    );
+  border: 1px solid var(--briefcase-metal-dark);
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.45),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.12),
+    0 6px 18px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.bodyInner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2px 3px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 35%
+  );
+}
+
+.bodyNumber {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 900;
+  color: var(--briefcase-number);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55),
+    0 -1px 0 rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.02em;
+}
+
+.cornerRivets span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #f5f7fa,
+    var(--briefcase-metal-mid) 60%,
+    var(--briefcase-metal-dark)
+  );
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.cornerRivets span:nth-child(1) { top: 5px; left: 5px; }
+.cornerRivets span:nth-child(2) { top: 5px; right: 5px; }
+.cornerRivets span:nth-child(3) { bottom: 5px; left: 5px; }
+.cornerRivets span:nth-child(4) { bottom: 5px; right: 5px; }
+
+/* ── Open / Money reveal ── */
+.open {
+  cursor: default;
+  pointer-events: none;
+}
+
+.open .body {
+  background: linear-gradient(170deg, #1a2228 0%, #0d1218 100%);
+  border-color: #3a4450;
+}
+
+.open .bodyInner {
+  background: radial-gradient(
+    ellipse at center 60%,
+    rgba(124, 252, 0, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+.open .handleBar,
+.open .lidFace {
+  opacity: 0.65;
+}
+
+.moneyReveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 2px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.moneyIcon {
+  font-size: clamp(0.65rem, 2vw, 0.95rem);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.moneyAmount {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(0.45rem, 1.6vw, 0.68rem);
+  font-weight: 800;
+  color: #7cfc00;
+  text-shadow: 0 0 6px rgba(124, 252, 0, 0.45);
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+}
+
+.compact .moneyAmount {
+  font-size: clamp(0.4rem, 1.4vw, 0.58rem);
+  letter-spacing: -0.03em;
+}
+
+.highValue .moneyAmount {
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.55);
+}
+
+.lowValue .moneyAmount {
+  color: #90ee90;
+}
+
+/* ── Player case highlight ── */
+.playerCase .body {
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.45),
+    0 0 18px rgba(255, 180, 0, 0.3),
+    0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+.playerCase .lidFace {
+  border-color: var(--accent);
+}
+
+.playerBadge {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(255, 180, 0, 0.2);
+  padding: 1px 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+.highlighted .body {
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.tile:focus-visible .body {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow:
+      inset 0 2px 8px rgba(255, 255, 255, 0.45),
+      0 0 12px rgba(255, 180, 0, 0.25),
+      0 6px 18px rgba(0, 0, 0, 0.28);
+  }
+  50% {
+    box-shadow:
+      inset 0 2px 8px rgba(255, 255, 255, 0.45),
+      0 0 22px rgba(255, 180, 0, 0.5),
+      0 6px 18px rgba(0, 0, 0, 0.28);
+  }
+}
+
+@media (max-width: 480px) {
+  .tile {
+    aspect-ratio: 3 / 4;
+  }
+
+  .handleBar {
+    border-width: 1px;
+  }
+
+  .bodyNumber {
+    font-size: 0.85rem;
+  }
+
+  .moneyAmount {
+    font-size: clamp(0.38rem, 1.3vw, 0.52rem);
+  }
+}

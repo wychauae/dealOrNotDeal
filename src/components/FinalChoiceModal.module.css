@@ -1,0 +1,132 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal {
+  background: var(--glass-bg);
+  border: 2px solid var(--accent);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-gold-lg);
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+}
+
+.cases {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.caseOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem 1.5rem;
+  background: var(--surface-elevated);
+  border-radius: 12px;
+  border: 2px solid var(--glass-border);
+}
+
+.caseNum {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.caseLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.vs {
+  font-weight: 800;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.keepBtn,
+.swapBtn {
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: box-shadow 0.2s;
+}
+
+.keepBtn {
+  background: var(--gradient-gold-solid);
+  color: #1a1000;
+  box-shadow: var(--shadow-gold);
+}
+
+.swapBtn {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  border: 2px solid var(--glass-border);
+}
+
+.swapBtn:hover {
+  border-color: var(--accent);
+}
+
+.hint {
+  margin: 1.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.keepBtn:focus-visible,
+.swapBtn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .cases {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .vs {
+    transform: rotate(90deg);
+  }
+}

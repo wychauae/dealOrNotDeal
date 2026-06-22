@@ -1,0 +1,57 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  max-width: 400px;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.value {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 900;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.message {
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.highValue .value {
+  color: var(--danger);
+}
+
+.lowValue .value {
+  color: var(--success);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+}

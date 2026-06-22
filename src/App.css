@@ -1,0 +1,22 @@
+.app {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 180, 0, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(100, 80, 255, 0.06) 0%, transparent 60%),
+    var(--bg-primary);
+}
+
+[data-theme='dark'] .app-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 215, 0, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(80, 60, 200, 0.08) 0%, transparent 60%),
+    var(--bg-primary);
+}

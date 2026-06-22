@@ -1,0 +1,48 @@
+.status {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.badge,
+.badgeAccent {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.badge {
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+}
+
+.badgeAccent {
+  background: rgba(255, 180, 0, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(255, 180, 0, 0.3);
+}
+
+.message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .message {
+    font-size: 0.9rem;
+  }
+}
