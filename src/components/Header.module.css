@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
 }
 
 .langBtn {
@@ -65,31 +65,46 @@
   font-weight: 800;
   letter-spacing: 0.02em;
   color: var(--text-primary);
-  background: var(--surface-elevated);
+}
+
+[data-theme='dark'] .controlBtn,
+[data-theme='dark'] .langBtn {
+  background: rgba(255, 215, 0, 0.12);
+  border-color: rgba(255, 215, 0, 0.45);
 }
 
 [data-theme='dark'] .langBtn {
   color: var(--accent);
-  background: rgba(255, 215, 0, 0.12);
-  border-color: rgba(255, 215, 0, 0.45);
   text-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
 }
 
+[data-theme='dark'] .controlBtn:hover,
 [data-theme='dark'] .langBtn:hover {
   background: rgba(255, 215, 0, 0.22);
   border-color: var(--accent);
+}
+
+[data-theme='dark'] .langBtn:hover {
   color: #fff8dc;
 }
 
+[data-theme='light'] .controlBtn,
 [data-theme='light'] .langBtn {
-  color: #3a4258;
   background: rgba(255, 255, 255, 0.95);
   border-color: #b0b8c4;
 }
 
+[data-theme='light'] .langBtn {
+  color: #3a4258;
+}
+
+[data-theme='light'] .controlBtn:hover,
+[data-theme='light'] .langBtn:hover {
+  border-color: var(--accent);
+}
+
 [data-theme='light'] .langBtn:hover {
   color: var(--accent);
-  border-color: var(--accent);
 }
 
 .controlBtn:hover,

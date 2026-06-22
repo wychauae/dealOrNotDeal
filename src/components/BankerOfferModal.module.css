@@ -104,8 +104,12 @@
   outline-offset: 2px;
 }
 
-.bargainBtn {
+.bargainWrap {
   margin-top: 1rem;
+}
+
+.bargainBtn {
+  position: relative;
   width: 100%;
   padding: 0.75rem 1rem;
   border: 2px dashed var(--glass-border);
@@ -115,7 +119,51 @@
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  overflow: hidden;
+  isolation: isolate;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.bargainLabel {
+  position: relative;
+  z-index: 2;
+}
+
+.holdProgress {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 180, 0, 0.35) 0%,
+    rgba(255, 215, 0, 0.5) 100%
+  );
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.holdRing {
+  position: absolute;
+  inset: 3px;
+  z-index: 1;
+  border-radius: 9px;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  opacity: calc(0.35 + var(--hold-progress, 0) * 0.65);
+  transform: rotate(calc(var(--hold-progress, 0) * 360deg));
+  pointer-events: none;
+}
+
+.bargainBtnTouch:not(:disabled) {
+  border-style: solid;
+}
+
+.bargainBtnHolding {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(255, 180, 0, 0.35);
+  transform: scale(0.98);
 }
 
 .bargainBtn:hover:not(:disabled) {
@@ -132,6 +180,13 @@
 .bargainBtn:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
+}
+
+.bargainHint {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .bargainingState {

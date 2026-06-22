@@ -4,6 +4,7 @@ import { formatCurrency } from '../utils/gameLogic';
 import { useSound } from '../hooks/useSound';
 import { useTranslation } from '../i18n/useTranslation';
 import { getBargainMessageKey } from '../i18n/translations';
+import { BargainButton } from './BargainButton';
 import styles from './BankerOfferModal.module.css';
 
 interface BankerOfferModalProps {
@@ -142,17 +143,7 @@ export function BankerOfferModal({
               </motion.button>
             </div>
 
-            <motion.button
-              type="button"
-              className={styles.bargainBtn}
-              onClick={handleBargain}
-              disabled={hasBargained}
-              whileHover={hasBargained ? undefined : { scale: 1.02 }}
-              whileTap={hasBargained ? undefined : { scale: 0.98 }}
-              aria-label={hasBargained ? t('bargainUsedAria') : t('bargainAria')}
-            >
-              {hasBargained ? t('bargainUsed') : t('bargain')}
-            </motion.button>
+            <BargainButton disabled={hasBargained} onConfirm={handleBargain} />
           </>
         )}
       </motion.div>

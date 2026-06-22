@@ -60,6 +60,7 @@ const en = {
   bargainUsed: '📞 Bargain Used',
   bargainUsedAria: 'Bargain already used this game',
   bargainAria: 'Bargain with the Banker for a better offer (one time only)',
+  bargainHoldHint: 'Hold for 2s to confirm',
 
   bargainRefusedFirm: 'The Banker holds firm. No change to the offer.',
   bargainRefusedBudge: 'The Banker refuses to budge on this one.',
@@ -148,6 +149,7 @@ const zh: Record<keyof typeof en, string> = {
   bargainUsed: '📞 已使用议价',
   bargainUsedAria: '本局已使用过议价',
   bargainAria: '与银行家议价以获得更高报价（仅限一次）',
+  bargainHoldHint: '长按 2 秒确认',
 
   bargainRefusedFirm: '银行家坚持原价，报价不变。',
   bargainRefusedBudge: '银行家拒绝让步。',
